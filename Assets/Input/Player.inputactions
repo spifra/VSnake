@@ -1,0 +1,33 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "0ae8f15d-f677-4dbc-9fb1-870d1e089b81",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Value",
+                    "id": "55c478b1-e824-4f92-8be8-213cb6c6ca64",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a42a1f38-bb03-4547-9105-2493297a4fa6",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
