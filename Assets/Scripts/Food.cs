@@ -14,11 +14,10 @@ public class Food : MonoBehaviour
     {
         Bounds bounds = field.bounds;
 
-        float x = Random.Range(bounds.min.x, bounds.max.x);
-        float y = Random.Range(bounds.min.y, bounds.max.y);
+        float x = Random.Range(bounds.min.x + 0.5f, bounds.max.x - 0.5f);
+        float y = Random.Range(bounds.min.y + 0.5f, bounds.max.y - 0.5f);
 
         transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0);
-        Debug.Log(transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

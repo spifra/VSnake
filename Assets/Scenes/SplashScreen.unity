@@ -149,7 +149,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237538466}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 3e26c0e5a0e81354190feaf5efcbe8dd, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 2992840ed39347942a9c9d48cab7271d, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 259808327}
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 237538466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed091151e465a54aa2b012aba69db95, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f3617fbd96965140bc66cfc0997a598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToWait: 5
@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 259808327}
   - component: {fileID: 259808326}
   - component: {fileID: 259808329}
+  - component: {fileID: 259808330}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -381,3 +382,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &259808330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259808325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
