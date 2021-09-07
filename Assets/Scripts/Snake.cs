@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Snake : MonoBehaviour
 {
     public bool isDebug = true;
-    public bool alternativeControls = true;
 
     [SerializeField]
     [Range(0, 10)]
@@ -25,6 +24,13 @@ public class Snake : MonoBehaviour
     private GameObject bodyParent;
 
     private bool isDead = false;
+
+    public bool alternativeControls = true;
+
+    private void Awake()
+    {
+        GameManager.instance.GetSnakeInfo(this);
+    }
 
     private void Start()
     {
