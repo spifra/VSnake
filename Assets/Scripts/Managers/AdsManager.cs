@@ -92,8 +92,8 @@ public class AdsManager : Singleton<AdsManager>
     {
 
         this.rewardedAd = new RewardedAd(rewardedID);
-        //TODO Respawn
-        //this.rewardedAd.OnUserEarnedReward += LevelManager.Instance.RespawnPlayer;
+        
+        this.rewardedAd.OnUserEarnedReward += GameManager.instance.RespawnPlayer;
         this.rewardedAd.OnAdLoaded += UserChoseToWatchAd;
 
         // Create an empty ad request.
@@ -208,8 +208,8 @@ public class AdsManager : Singleton<AdsManager>
     public void RequestAndShowInterstitialOnHome()
     {
         RequestInterstitial();
-        //TODO Back to main menu
-        //interstitial.OnAdClosed += LevelManager.Instance.GoToHome;
+
+        interstitial.OnAdClosed += GameManager.instance.GoToHome;
     }
 
     public void RequestAndShowInterstitialOnRestart()
