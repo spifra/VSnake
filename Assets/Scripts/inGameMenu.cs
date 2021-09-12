@@ -18,6 +18,12 @@ public class inGameMenu : MonoBehaviour
     private GameObject ContinueButton;
 
     [SerializeField]
+    private GameObject scoreGO;
+
+    [SerializeField]
+    private GameObject powerUpGO;
+
+    [SerializeField]
     private Text totalScore;
 
     private bool isAlreadyRewarded = false;
@@ -74,5 +80,19 @@ public class inGameMenu : MonoBehaviour
         gameOverPopup.SetActive(true);
     }
 
+    public void OnScore(int score)
+    {
+        Animator anim = scoreGO.GetComponent<Animator>();
+        scoreGO.GetComponent<Text>().text = score.ToString();
+        anim.SetTrigger("OnScore");
+    }
+    public void OnPowerUp(string powerUp, Color color, bool isPositive)
+    {
+        Animator anim = powerUpGO.GetComponent<Animator>();
+        powerUpGO.GetComponent<Text>().color = color;
+        powerUpGO.GetComponent<Text>().text = powerUp;
+        SoundEffectManager.instance.OnPowerUp(isPositive);
+        anim.SetTrigger("OnPowerUp");
+    }
 
 }

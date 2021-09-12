@@ -7,9 +7,8 @@ public class Snake : MonoBehaviour
 {
     public bool isDebug = true;
 
-    [SerializeField]
     [Range(0, 10)]
-    private float speed;
+    public float speed;
 
     [SerializeField]
     [Header("Speed to add to the Snake every time we add a piece")]
@@ -177,28 +176,12 @@ public class Snake : MonoBehaviour
             // Move body
             for (int i = pieces.Count - 1; i > 0; i--)
             {
-                pieces[i].position = Vector3.Lerp(pieces[i].position, pieces[i - 1].position, 0.05f);
+                pieces[i].position = Vector3.Lerp(pieces[i].position, pieces[i - 1].position, speed * Time.deltaTime);
             }
 
             transform.position += transform.up * speed * Time.deltaTime;
         }
     }
-
-    //private void AddPiece()
-    //{
-    //    if (bodyParent == null)
-    //    {
-    //        bodyParent = new GameObject("Body");
-    //        bodyParent.transform.position = new Vector3(0, 0, 0);
-    //    }
-    //    Transform piece = Instantiate(piecePrefab, bodyParent.transform);
-    //    piece.position = pieces[pieces.Count - 1].position;
-
-    //    pieces.Add(piece);
-    //    speed += speedPerPiece;
-
-    //    ChangeScore(100);
-    //}
 
     public void AddPieces(int num, bool addScore)
     {
@@ -216,7 +199,7 @@ public class Snake : MonoBehaviour
         }
         if (addScore)
         {
-            ChangeScore(100);
+            GameManager.instance.AddScore(100);
         }
     }
     private void GameOver()
@@ -237,6 +220,7 @@ public class Snake : MonoBehaviour
             }
             Destroy(bodyParent);
         }
+        SoundEffectManager.instance.OnGameOver();
         Destroy(gameObject);
     }
 
@@ -252,14 +236,17 @@ public class Snake : MonoBehaviour
         }
     }
 
-    private void ChangeScore(int points)
-    {
-        GameManager.instance.score += points;
-    }
-
     private void OnDestroy()
     {
         if (!isMenu)
             GameManager.instance.GameOver();
+    }
+
+    public float ChangeSpeed(float multiplier)
+    {
+        float oldSpeed = speed;
+        speed *= multiplier;
+        return oldSpeed;
+        
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - Walls
+  - PowerUp
   layers:
   - Default
   - TransparentFX

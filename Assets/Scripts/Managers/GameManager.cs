@@ -13,9 +13,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject snakePrefab;
 
-    private Snake snake;
+    [HideInInspector]
+    public Snake snake;
 
     private bool isAlternativeCommand = false;
+
+    private int scoreMultiplier = 1;
 
     public void GetSnakeInfo(Snake snake)
     {
@@ -27,6 +30,14 @@ public class GameManager : Singleton<GameManager>
     {
         isAlternativeCommand = value;
         snake.alternativeControls = value;
+    }
+
+    public int AddScore(int points)
+    {
+        score += points * scoreMultiplier;
+        SoundEffectManager.instance.OnFood();
+        menu.OnScore(score);
+        return score;
     }
 
     internal void GoToHome(object sender, EventArgs e)
@@ -61,5 +72,10 @@ public class GameManager : Singleton<GameManager>
             int num = score / 100;
             snake.AddPieces(num, false);
         }
+    }
+
+    public void ScoreMultiplier(int multiplier)
+    {
+        scoreMultiplier = multiplier;
     }
 }
