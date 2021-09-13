@@ -25,10 +25,6 @@ public class AdsManager : Singleton<AdsManager>
     private string interstitialID = "ca-app-pub-3940256099942544/1033173712";
     private string rewardedID = "ca-app-pub-3940256099942544/5224354917";
 
-    //TODO Main manu
-    //[HideInInspector]
-    //public inGameMenu inGameMenu;
-
     private void Start()
     {
         MobileAds.Initialize(initStatus => { });
@@ -94,6 +90,7 @@ public class AdsManager : Singleton<AdsManager>
         this.rewardedAd = new RewardedAd(rewardedID);
         
         this.rewardedAd.OnUserEarnedReward += GameManager.instance.RespawnPlayer;
+
         this.rewardedAd.OnAdLoaded += UserChoseToWatchAd;
 
         // Create an empty ad request.

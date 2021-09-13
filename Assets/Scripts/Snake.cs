@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class Snake : MonoBehaviour
 {
@@ -42,18 +43,8 @@ public class Snake : MonoBehaviour
         {
             MouseBehaviour();
         }
-        else
-        {
-            TouchBehaviour();
-        }
 
         Movement();
-    }
-
-    //Call pause menu
-    private void OnPause()
-    {
-        Time.timeScale = 0;
     }
 
     private void MouseBehaviour()
@@ -112,62 +103,67 @@ public class Snake : MonoBehaviour
             }
         }
     }
-    private void TouchBehaviour()
+    public void TouchBehaviour(Vector2 position)
     {
-        if (Input.touchCount > 0)
+        Debug.Log("qui" + position);
+        if (alternativeControls == true)
         {
-            if (alternativeControls == true)
+            if (position.x < Screen.width / 2)
             {
-                if (Input.GetTouch(0).position.x < Screen.width / 2)
+                switch (transform.rotation.eulerAngles.z)
                 {
-                    switch (transform.rotation.eulerAngles.z)
-                    {
-                        case 0:
-                            transform.rotation = Quaternion.Euler(0, 0, 90);
-                            break;
-                        case 90:
-                            transform.rotation = Quaternion.Euler(0, 0, 180);
-                            break;
-                        case 180:
-                            transform.rotation = Quaternion.Euler(0, 0, 90);
-                            break;
-                        case 270:
-                            transform.rotation = Quaternion.Euler(0, 0, 0);
-                            break;
-                    }
-                }
-                else if (Input.GetTouch(0).position.x > Screen.width / 2)
-                {
-                    switch (transform.rotation.eulerAngles.z)
-                    {
-                        case 0:
-                            transform.rotation = Quaternion.Euler(0, 0, -90);
-                            break;
-                        case 90:
-                            transform.rotation = Quaternion.Euler(0, 0, 0);
-                            break;
-                        case 180:
-                            transform.rotation = Quaternion.Euler(0, 0, -90);
-                            break;
-                        case 270:
-                            transform.rotation = Quaternion.Euler(0, 0, 180);
-                            break;
-                    }
+                    case 0:
+                        transform.rotation = Quaternion.Euler(0, 0, 90);
+                        break;
+                    case 90:
+                        transform.rotation = Quaternion.Euler(0, 0, 180);
+                        break;
+                    case 180:
+                        transform.rotation = Quaternion.Euler(0, 0, 90);
+                        break;
+                    case 270:
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                        break;
                 }
             }
-            else
+            else if (position.x > Screen.width / 2)
             {
-                if (Input.GetTouch(0).position.x < Screen.width / 2)
+                switch (transform.rotation.eulerAngles.z)
                 {
-                    transform.rotation *= Quaternion.Euler(0, 0, 90);
-                }
-                else if (Input.GetTouch(0).position.x > Screen.width / 2)
-                {
-                    transform.rotation *= Quaternion.Euler(0, 0, -90);
+                    case 0:
+                        transform.rotation = Quaternion.Euler(0, 0, -90);
+                        break;
+                    case 90:
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                        break;
+                    case 180:
+                        transform.rotation = Quaternion.Euler(0, 0, -90);
+                        break;
+                    case 270:
+                        transform.rotation = Quaternion.Euler(0, 0, 180);
+                        break;
                 }
             }
         }
+        else
+        {
+            if (position.x < Screen.width / 2)
+            {
+                transform.rotation *= Quaternion.Euler(0, 0, 90);
+            }
+            else if (position.x > Screen.width / 2)
+            {
+                transform.rotation *= Quaternion.Euler(0, 0, -90);
+            }
+        }
     }
+
+    public void OnPause()
+    {
+        if (!isMenu)
+            GameManager.instance.menu.OnPause();
+    }
+
     //Position
     private void Movement()
     {
@@ -247,6 +243,5 @@ public class Snake : MonoBehaviour
         float oldSpeed = speed;
         speed *= multiplier;
         return oldSpeed;
-        
     }
 }

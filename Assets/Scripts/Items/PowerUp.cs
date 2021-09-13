@@ -16,7 +16,7 @@ public class PowerUp : Item
 
     private void Start()
     {
-        StartCoroutine("Timer");
+        StartCoroutine(Positioning(Random.Range(minSeconds, maxSeconds + 1)));
     }
 
     private IEnumerator Timer()
@@ -46,7 +46,6 @@ public class PowerUp : Item
         GetComponent<BoxCollider2D>().enabled = isVisible;
     }
 
-
     private void ChoosePowerUp()
     {
         int i = Random.Range(0, 3);
@@ -71,6 +70,16 @@ public class PowerUp : Item
     private void ResetPowerUp()
     {
         GameManager.instance.ScoreMultiplier(1);
-        GameManager.instance.snake.speed = oldSpeed;
+        if (oldSpeed != 0)
+            GameManager.instance.snake.speed = oldSpeed;
     }
+
+    private IEnumerator Positioning(float seconds)
+    {
+        ChangeStatus(false);
+        yield return new WaitForSeconds(seconds);
+        ChangeStatus(true);
+        transform.position = RandomPosition();
+    }
+
 }

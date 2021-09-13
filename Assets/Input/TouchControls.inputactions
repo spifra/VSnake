@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "TouchControls",
     "maps": [
         {
             "name": "Player",
@@ -10,6 +10,14 @@
                     "type": "Button",
                     "id": "55c478b1-e824-4f92-8be8-213cb6c6ca64",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Direction",
+                    "type": "Value",
+                    "id": "db9be2fd-9a05-4fd6-b2c9-5cd5e3191a29",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -23,6 +31,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c76c90c-0ac2-4eb4-be11-a50291c062c9",
+                    "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

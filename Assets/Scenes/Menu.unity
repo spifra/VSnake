@@ -375,6 +375,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 275087354532619328, guid: 6f8e4b229c97df84cbc667a7de7869fc, type: 3}
+      propertyPath: maxIntensity
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 275087355091924257, guid: 6f8e4b229c97df84cbc667a7de7869fc, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -544,7 +548,7 @@ MonoBehaviour:
   m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 1
 --- !u!114 &742721951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,6 +1864,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924391996}
   m_CullTransparentMesh: 1
+--- !u!1 &2007029125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2007029126}
+  - component: {fileID: 2007029127}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2007029126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007029125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2007029127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007029125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb66454d16ac8324091137fd61fe0a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPersistant: 0
 --- !u!61 &3110697636852092548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1984,12 +2032,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7167694dadb9e594eacef55fe118f6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 1
+  isDebug: 0
   speed: 1
   speedPerPiece: 0.5
   isMenu: 1
   piecePrefab: {fileID: 7249819447746453620, guid: e6f1f1e395a121c42ac77fff6cdec0a1, type: 3}
-  alternativeControls: 1
+  alternativeControls: 0
 --- !u!50 &5563443551585017281
 Rigidbody2D:
   serializedVersion: 4
