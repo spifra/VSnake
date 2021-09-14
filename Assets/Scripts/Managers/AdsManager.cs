@@ -21,9 +21,9 @@ public class AdsManager : Singleton<AdsManager>
     //private string TESTInterstitialID = "ca-app-pub-2811790606724562/9146030269";
     //private string TESTRewardedID = "ca-app-pub-2811790606724562/4300897693";
 
-    private string bannerId = "ca-app-pub-3940256099942544/6300978111";
-    private string interstitialID = "ca-app-pub-3940256099942544/1033173712";
-    private string rewardedID = "ca-app-pub-3940256099942544/5224354917";
+    private string bannerId = "ca-app-pub-2811790606724562/4841961358";
+    private string interstitialID = "ca-app-pub-2811790606724562/9146030269";
+    private string rewardedID = "ca-app-pub-2811790606724562/4300897693";
 
     private void Start()
     {
@@ -32,7 +32,6 @@ public class AdsManager : Singleton<AdsManager>
 
     public void RequestAndShowBanner()
     {
-
         // Clean up banner before reusing
         if (bannerView != null)
         {
@@ -48,6 +47,11 @@ public class AdsManager : Singleton<AdsManager>
         AdRequest request = new AdRequest.Builder().Build();
 
         this.bannerView.LoadAd(request);
+    }
+
+    public void DestroyBanner()
+    {
+        bannerView.Destroy();
     }
 
     #region INTERSTITIAL
@@ -88,10 +92,10 @@ public class AdsManager : Singleton<AdsManager>
     {
 
         this.rewardedAd = new RewardedAd(rewardedID);
-        
-        this.rewardedAd.OnUserEarnedReward += GameManager.instance.RespawnPlayer;
 
         this.rewardedAd.OnAdLoaded += UserChoseToWatchAd;
+
+        this.rewardedAd.OnAdClosed += GameManager.instance.RespawnPlayer;
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
@@ -113,8 +117,7 @@ public class AdsManager : Singleton<AdsManager>
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
     {
         MonoBehaviour.print(
-            "HandleRewardedAdFailedToLoad event received with message: "
-                             + args.Message);
+            "HandleRewardedAdFailedToLoad event received with message: " + args);
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
@@ -125,8 +128,7 @@ public class AdsManager : Singleton<AdsManager>
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
     {
         MonoBehaviour.print(
-            "HandleRewardedAdFailedToShow event received with message: "
-                             + args.Message);
+            "HandleRewardedAdFailedToShow event received with message: " + args);
     }
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)

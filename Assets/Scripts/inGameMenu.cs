@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,12 +25,16 @@ public class inGameMenu : MonoBehaviour
     private GameObject powerUpGO;
 
     [SerializeField]
+    private GameObject getReadyGO;
+
+    [SerializeField]
     private Text totalScore;
 
     private bool isAlreadyRewarded = false;
 
     private void Awake()
     {
+        AdsManager.instance.DestroyBanner();
         GameManager.instance.menu = this;
     }
 
@@ -51,7 +56,6 @@ public class inGameMenu : MonoBehaviour
     {
         panel.SetActive(false);
         pausePopup.SetActive(false);
-
         Time.timeScale = 1;
     }
 
@@ -64,20 +68,24 @@ public class inGameMenu : MonoBehaviour
     {
         isAlreadyRewarded = true;
         gameOverPopup.SetActive(false);
-        panel.SetActive(false);
+        panel.SetActive(true);
         AdsManager.instance.RequestedAndShowRewardedAd();
     }
 
     public void GameOver(int score)
     {
-        totalScore.text = score.ToString();
-
-        panel.SetActive(true);
-        if (isAlreadyRewarded)
+        if (totalScore != null)
         {
-            ContinueButton.SetActive(false);
+            totalScore.text = score.ToString();
+
+            panel.SetActive(true);
+            if (isAlreadyRewarded)
+            {
+                ContinueButton.SetActive(false);
+            }
+            gameOverPopup.SetActive(true);
         }
-        gameOverPopup.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void OnScore(int score)
@@ -95,4 +103,8 @@ public class inGameMenu : MonoBehaviour
         anim.SetTrigger("OnPowerUp");
     }
 
+    public void SetGetReady(bool active)
+    {
+        getReadyGO.SetActive(active);
+    }
 }

@@ -1,5 +1,6 @@
 using GoogleMobileAds.Api;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,8 @@ public class GameManager : Singleton<GameManager>
     private bool isAlternativeCommand = false;
 
     private int scoreMultiplier = 1;
+
+    private int bodyPieces = 0;
 
     public void GetSnakeInfo(Snake snake)
     {
@@ -49,33 +52,54 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene("Menu");
 
         score = 0;
+        bodyPieces = 0;
         Time.timeScale = 1;
     }
 
     public void Restart()
     {
         score = 0;
-        SceneManager.LoadScene("Gameplay");
+        bodyPieces = 0;
         Time.timeScale = 1;
+        SceneManager.LoadScene("Gameplay");
     }
 
-    public void GameOver()
+    public void GameOver(int pieces)
     {
+        bodyPieces = pieces;
         menu.GameOver(score);
     }
 
-    internal void RespawnPlayer(object sender, Reward e)
+    private IEnumerator IRespawnPlayer()
     {
-        Instantiate(snakePrefab, new Vector2(0, 0), Quaternion.identity);
+        menu.OnResume();
+        menu.SetGetReady(true);
+        yield return new WaitForSeconds(2f);
+        menu.SetGetReady(false);
+        snake = Instantiate(snakePrefab, new Vector2(0, 0), Quaternion.identity).GetComponent<Snake>();
         if (score != 0)
         {
-            int num = score / 100;
-            snake.AddPieces(num, false);
+            snake.AddPieces(bodyPieces, false);
         }
     }
 
     public void ScoreMultiplier(int multiplier)
     {
         scoreMultiplier = multiplier;
+    }
+
+    public void GiveSnakeDirection(Vector2 direction)
+    {
+        if (snake != null)
+        {
+            if (snake.isDebug)
+                snake.MouseBehaviour();
+            else
+                snake.TouchBehaviour(direction);
+        }
+    }
+    internal void RespawnPlayer(object sender, EventArgs e)
+    {
+        StartCoroutine("IRespawnPlayer");
     }
 }

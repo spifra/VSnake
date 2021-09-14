@@ -28,8 +28,7 @@ public class InputManager : Singleton<InputManager>
     }
     private void PerformedTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch position " + context.ReadValue<Vector2>());
-        GameManager.instance.snake.TouchBehaviour(context.ReadValue<Vector2>());
+        GameManager.instance.GiveSnakeDirection(context.ReadValue<Vector2>());
     }
     private void PerformedPause(InputAction.CallbackContext ctx)
     {

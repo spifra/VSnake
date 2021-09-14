@@ -7,6 +7,7 @@ TagManager:
   - Food
   - Walls
   - PowerUp
+  - Body
   layers:
   - Default
   - TransparentFX
@@ -47,12 +48,15 @@ TagManager:
   - name: Background
     uniqueID: 3855149377
     locked: 0
-  - name: Player
-    uniqueID: 1343627443
-    locked: 0
   - name: Food
     uniqueID: 1540016459
     locked: 0
   - name: Walls
     uniqueID: 3168665653
+    locked: 0
+  - name: Player
+    uniqueID: 1343627443
+    locked: 0
+  - name: UI
+    uniqueID: 630152767
     locked: 0

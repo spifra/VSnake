@@ -29,13 +29,14 @@ public class PowerUp : Item
         ChangeStatus(true);
 
         ResetPowerUp();
-        transform.position = RandomPosition();
+        StartCoroutine(Positioning(Random.Range(minSeconds, maxSeconds + 1)));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
+            StopAllCoroutines();
             StartCoroutine("Timer");
         }
     }
@@ -76,10 +77,15 @@ public class PowerUp : Item
 
     private IEnumerator Positioning(float seconds)
     {
-        ChangeStatus(false);
-        yield return new WaitForSeconds(seconds);
-        ChangeStatus(true);
-        transform.position = RandomPosition();
+        while (true)
+        {
+            Debug.Log("Positioning Off " + seconds);
+            ChangeStatus(false);
+            yield return new WaitForSeconds(seconds);
+            transform.position = RandomPosition();
+            ChangeStatus(true);
+            Debug.Log("Positioning On " + seconds);
+            yield return new WaitForSeconds(seconds);
+        }
     }
-
 }

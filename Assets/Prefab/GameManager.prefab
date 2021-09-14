@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistant: 1
+  score: 0
+  menu: {fileID: 0}
+  snakePrefab: {fileID: 3110697638349352934, guid: 7d3cf1719d8c10c4880f11a83577f55d, type: 3}
   snake: {fileID: 0}

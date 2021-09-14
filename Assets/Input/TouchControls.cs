@@ -40,7 +40,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a42a1f38-bb03-4547-9105-2493297a4fa6"",
                     ""path"": ""<Pointer>/press"",
-                    ""interactions"": ""Hold(duration=0.5)"",
+                    ""interactions"": ""Hold(duration=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",

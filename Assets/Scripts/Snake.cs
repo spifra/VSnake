@@ -39,19 +39,14 @@ public class Snake : MonoBehaviour
 
     private void Update()
     {
-        if (isDebug)
-        {
-            MouseBehaviour();
-        }
-
         Movement();
     }
 
-    private void MouseBehaviour()
+    public void MouseBehaviour()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            if (alternativeControls == true)
+            if (!alternativeControls)
             {
                 if (Mouse.current.position.ReadValue().x < Screen.width / 2)
                 {
@@ -105,8 +100,7 @@ public class Snake : MonoBehaviour
     }
     public void TouchBehaviour(Vector2 position)
     {
-        Debug.Log("qui" + position);
-        if (alternativeControls == true)
+        if (!alternativeControls)
         {
             if (position.x < Screen.width / 2)
             {
@@ -158,12 +152,6 @@ public class Snake : MonoBehaviour
         }
     }
 
-    public void OnPause()
-    {
-        if (!isMenu)
-            GameManager.instance.menu.OnPause();
-    }
-
     //Position
     private void Movement()
     {
@@ -192,6 +180,10 @@ public class Snake : MonoBehaviour
             piece.position = pieces[pieces.Count - 1].position;
             pieces.Add(piece);
             speed += speedPerPiece;
+
+            if (pieces.Count > 3)
+                piece.GetComponent<BoxCollider2D>().enabled = true;
+
         }
         if (addScore)
         {
@@ -226,22 +218,20 @@ public class Snake : MonoBehaviour
         {
             AddPieces(1, true);
         }
-        else if (collision.tag == "Walls")
+        else if (collision.tag == "Walls" || collision.tag == "Body")
         {
             GameOver();
         }
     }
-
-    private void OnDestroy()
-    {
-        if (!isMenu)
-            GameManager.instance.GameOver();
-    }
-
     public float ChangeSpeed(float multiplier)
     {
         float oldSpeed = speed;
         speed *= multiplier;
         return oldSpeed;
+    }
+    private void OnDestroy()
+    {
+        if (!isMenu)
+            GameManager.instance.GameOver(pieces.Count - 1);
     }
 }
